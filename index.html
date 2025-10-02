@@ -170,7 +170,7 @@
                 </p>
                 
                 <!-- Interactive Demo -->
-                <div class="flex flex-col lg:flex-row gap-8 items-start justify-center max-w-6xl mx-auto mb-8">
+                <div class="interactive-demo-container flex flex-col lg:flex-row gap-8 items-start justify-center max-w-6xl mx-auto mb-8">
                     
                     <!-- Barber Phone Control -->
                     <div class="flex-1 max-w-sm mx-auto">
@@ -236,16 +236,67 @@
                         <div class="text-4xl text-blue-600 animate-pulse">→</div>
                     </div>
                     
-                    <!-- Customer Display -->
+                    <!-- Customer Display Phone -->
                     <div class="flex-1 max-w-sm mx-auto">
-                        <h3 class="font-bold text-lg mb-4 text-gray-800">💻 Quello che vede il Cliente</h3>
-                        <div class="customer-display bg-gray-100 rounded-xl p-6 shadow-xl border-4 border-gray-300">
-                            <div class="text-center">
-                                <h4 class="font-semibold text-gray-700 mb-4">🕒 Tempi di Attesa</h4>
-                                <div id="interactive-customer-display" class="mb-4">
-                                    <!-- Will be populated by JavaScript, synchronized with phone -->
+                        <h3 class="font-bold text-lg mb-4 text-gray-800">� Quello che vede il Cliente</h3>
+                        <div class="customer-phone-mockup bg-gray-900 rounded-3xl p-4 shadow-2xl">
+                            <!-- Phone Screen -->
+                            <div class="bg-white rounded-2xl p-4 min-h-96">
+                                <!-- Phone Header -->
+                                <div class="flex items-center justify-between mb-4 pb-3 border-b">
+                                    <div class="flex items-center space-x-1">
+                                        <div class="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                        <div class="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                        <div class="w-1 h-1 bg-gray-400 rounded-full"></div>
+                                    </div>
+                                    <div class="text-xs font-semibold text-gray-600">12:34</div>
+                                    <div class="flex items-center space-x-1">
+                                        <div class="text-xs">📶</div>
+                                        <div class="text-xs">🔋</div>
+                                    </div>
                                 </div>
-                                <p class="text-xs text-gray-500">Aggiornamento in tempo reale</p>
+                                
+                                <!-- App Header -->
+                                <div class="text-center mb-6">
+                                    <div class="w-12 h-12 bg-blue-600 rounded-xl mx-auto mb-2 flex items-center justify-center">
+                                        <span class="text-white text-xl">✂️</span>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800">Barbiere Roma</h4>
+                                    <p class="text-xs text-gray-500">Via del Corso, 123</p>
+                                </div>
+                                
+                                <!-- Status Display -->
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-700 text-center mb-4">🕒 Tempi di Attesa</h4>
+                                    <div id="interactive-customer-display" class="mb-4">
+                                        <!-- Will be populated by JavaScript, synchronized with barber phone -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Mock App Navigation -->
+                                <div class="mt-auto pt-6 border-t border-gray-100">
+                                    <div class="flex justify-around text-xs text-gray-400">
+                                        <div class="text-center">
+                                            <div class="text-sm mb-1">🏠</div>
+                                            <span>Home</span>
+                                        </div>
+                                        <div class="text-center text-blue-600">
+                                            <div class="text-sm mb-1">⏰</div>
+                                            <span>Attese</span>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-sm mb-1">📍</div>
+                                            <span>Mappa</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 text-center">
+                                    <div class="inline-flex items-center text-xs text-green-600">
+                                        <span class="animate-pulse mr-1">●</span>
+                                        <span>Collegato in tempo reale</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
