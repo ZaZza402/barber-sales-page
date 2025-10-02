@@ -1,0 +1,126 @@
+:root { 
+    --bg-color: #F4F1EC; 
+    --text-color: #212121; 
+    --accent-color: #004643; 
+    --border-color: rgba(0, 0, 0, 0.08); 
+    --whatsapp-color: #25D366; 
+}
+
+body { 
+    background-color: var(--bg-color); 
+    color: var(--text-color); 
+    font-family: 'Inter', sans-serif; 
+}
+
+.font-serif { 
+    font-family: 'Playfair Display', serif; 
+}
+
+.text-gradient { 
+    background: linear-gradient(45deg, var(--accent-color), #4d8a88); 
+    background-clip: text;
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
+.highlight-package { 
+    border-color: var(--accent-color); 
+    transform: scale(1.02); 
+    box-shadow: 0 10px 30px -5px rgba(0, 70, 67, 0.1); 
+    position: relative;
+}
+
+.demo-container { 
+    transition: opacity 0.3s ease-in-out; 
+}
+
+.demo-iframe { 
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    transform: scale(0.95); 
+}
+
+.demo-container.visible .demo-iframe { 
+    transform: scale(1); 
+}
+
+/* Enhanced Sales-focused Styles */
+.pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .8;
+    }
+}
+
+.price-highlight {
+    position: relative;
+    background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.value-proposition {
+    background: linear-gradient(135deg, var(--accent-color), #2d5a5a);
+    color: white;
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    background: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.waiting-times-demo {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.waiting-times-demo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+}
+
+.social-proof {
+    background: #f8fafc;
+    border-left: 4px solid var(--accent-color);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.urgency-banner {
+    background: linear-gradient(90deg, #dc2626, #b91c1c);
+    color: white;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: 600;
+}

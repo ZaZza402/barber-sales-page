@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siti Web per Barbieri | Prova le Demo dal Vivo</title>
+    <meta name="description" content="Non solo un sito web, ma uno strumento per la tua barberia. Prova le nostre demo interattive e scopri la funzione 'Attesa in Tempo Reale'.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- DEMO CONTAINER (hidden by default) -->
+    <div id="demo-container" class="fixed inset-0 bg-black/80 z-50 flex-col items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300 hidden">
+        <div id="demo-header" class="w-full max-w-6xl text-white flex justify-between items-center p-4 bg-gray-900/50 rounded-t-lg">
+            <h3 class="font-bold text-sm sm:text-base md:text-lg">
+                <span class="hidden sm:inline">Demo: </span><span id="demo-title"></span>
+            </h3>
+            <div class="flex items-center gap-1 sm:gap-2 md:gap-4">
+                 <a href="https://wa.me/390694428189?text=Ciao!%20Questo%20sito%20mi%20piace%20molto,%20possiamo%20parlarne?" target="_blank" onclick="trackWhatsApp('demo-header')" class="bg-[var(--whatsapp-color)] text-white px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-lg hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-2 group">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.570-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                    </svg>
+                    <span class="hidden md:inline text-xs md:text-sm font-medium">Contattami</span>
+                </a>
+                <button id="open-new-window-btn" class="bg-blue-600 text-white px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-lg hover:scale-105 transition-all duration-200 shadow-lg flex items-center gap-1 sm:gap-2 group" title="Apri in una nuova finestra">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18 19H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h5c.55 0 1-.45 1-1s-.45-1-1-1H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-6c0-.55-.45-1-1-1s-1 .45-1 1v5c0 .55-.45 1-1 1zM14 4c0 .55.45 1 1 1h2.59l-9.13 9.13c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L19 6.41V9c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1h-5c-.55 0-1 .45-1 1z"/>
+                    </svg>
+                    <span class="hidden lg:inline text-xs md:text-sm font-medium">Nuova Finestra</span>
+                </button>
+                <button id="close-demo-btn" class="text-white text-2xl md:text-3xl font-light hover:text-red-400 transition-colors">&times;</button>
+            </div>
+        </div>
+        <div id="demo-content" class="w-full max-w-6xl h-[85%] bg-white rounded-b-lg overflow-hidden shadow-2xl">
+            <!-- Iframe will be injected here -->
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-serif text-xl md:text-2xl font-bold text-gradient">
+                AxiomWeb
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Home</a>
+                <a href="#demo-preview" class="text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Demo Live</a>
+                <a href="#prezzi" class="text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Pacchetti</a>
+                <a href="#contatti" class="text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Contatti</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn-main" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition">
+                <div class="w-6 h-6 flex flex-col justify-center space-y-1">
+                    <span class="block w-full h-0.5 bg-gray-800 transition-all duration-300" id="line1-main"></span>
+                    <span class="block w-full h-0.5 bg-gray-800 transition-all duration-300" id="line2-main"></span>
+                    <span class="block w-full h-0.5 bg-gray-800 transition-all duration-300" id="line3-main"></span>
+                </div>
+            </button>
+            
+            <a href="https://wa.me/390694428189?text=Ciao!%20Vorrei%20informazioni%20sui%20vostri%20siti%20web%20per%20barbieri" onclick="trackWhatsApp('nav-cta')" class="hidden md:flex items-center bg-[var(--whatsapp-color)] text-white px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+                💬 Contattami
+            </a>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu-main" class="md:hidden bg-white border-t border-gray-200 absolute top-full left-0 right-0 transform -translate-y-full opacity-0 invisible transition-all duration-300 shadow-lg">
+            <nav class="px-6 py-4 space-y-4">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Home</a>
+                <a href="#demo-preview" class="block py-2 text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Demo Live</a>
+                <a href="#prezzi" class="block py-2 text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Pacchetti</a>
+                <a href="#contatti" class="block py-2 text-gray-700 hover:text-[var(--accent-color)] transition font-medium">Contatti</a>
+                <a href="https://wa.me/390694428189?text=Ciao!%20Vorrei%20informazioni%20sui%20vostri%20siti%20web%20per%20barbieri" onclick="trackWhatsApp('nav-mobile-cta')" class="flex items-center justify-center bg-[var(--whatsapp-color)] text-white py-3 mt-4 rounded-full font-semibold hover:scale-105 transition">
+                    💬 Contattami
+                </a>
+            </nav>
+        </div>
+    </nav>
+
+    <main id="home">
+        <!-- Urgency Banner -->
+        <div class="urgency-banner">
+            🔥 Solo 3 posti disponibili questo mese per nuovi progetti - Prenota la tua consulenza gratuita!
+        </div>
+
+        <!-- Hero Section -->
+        <section class="relative text-center container mx-auto px-6 pt-16 pb-20">
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <img src="demos/images/barber-at-work.jpg" alt="Background" class="w-full h-full object-cover">
+            </div>
+            <div class="relative z-10">
+                <h1 class="font-serif text-5xl md:text-7xl font-bold">Prima di comprare, <span class="text-gradient">prova.</span></h1>
+                <p class="mt-4 text-xl text-gray-600 max-w-4xl mx-auto">Non ti sto vendendo un'idea, ti sto mostrando il risultato finale. Clicca e naviga le demo interattive dei siti web che posso creare per la tua barberia.</p>
+            </div>
+            
+            <!-- Why This Exists -->
+            <div class="bg-gray-50 rounded-2xl p-8 mt-12 max-w-4xl mx-auto">
+                <h2 class="font-serif text-3xl font-bold mb-6 text-center">Perché Ho Creato Questo Sistema</h2>
+                <div class="text-center max-w-3xl mx-auto">
+                    <p class="text-lg text-gray-700 mb-4">
+                        <strong>Ho studiato decine di barberie a Roma.</strong> Stesso problema ovunque: clienti che aspettano senza sapere quanto, barbieri stressati al telefono, code disorganizzate.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6">
+                        La tecnologia esiste già. Il problema era che <strong>nessuno l'aveva adattata alle barberie.</strong> Così l'ho fatto io.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🔧</div>
+                            <h3 class="font-bold text-gray-800 mb-2">Soluzioni Pratiche</h3>
+                            <p class="text-sm text-gray-600">Non vendo siti belli. Risolvo problemi concreti che conosco bene.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">📍</div>
+                            <h3 class="font-bold text-gray-800 mb-2">Roma & Dintorni</h3>
+                            <p class="text-sm text-gray-600">Lavoro solo localmente. Ti incontro di persona, installiamo tutto insieme.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">💪</div>
+                            <h3 class="font-bold text-gray-800 mb-2">Garanzia Totale</h3>
+                            <p class="text-sm text-gray-600">Non funziona? Non paghi. Semplice. Non ho tempo per clienti insoddisfatti.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Value Proposition -->
+            <div class="value-proposition rounded-2xl p-8 mt-12 max-w-4xl mx-auto">
+                <h2 class="font-serif text-3xl font-bold mb-6">Il Problema che Risolvo</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div>
+                        <h3 class="font-bold text-xl mb-3">❌ Senza il mio sistema:</h3>
+                        <ul class="space-y-2 opacity-90">
+                            <li>• Clienti che aspettano senza sapere quanto</li>
+                            <li>• Code disorganizzate e clienti nervosi</li>
+                            <li>• Perdita di clienti per l'incertezza</li>
+                            <li>• Stress continuo nella gestione</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-3">✅ Con il mio sistema:</h3>
+                        <ul class="space-y-2 opacity-90">
+                            <li>• Tempi di attesa in tempo reale</li>
+                            <li>• Clienti informati e tranquilli</li>
+                            <li>• Più clienti serviti senza stress</li>
+                            <li>• Gestione automatica delle prenotazioni</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waiting Times Demo Preview -->
+        <section id="demo-preview" class="bg-gray-50 py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-serif text-4xl font-bold mb-4">La Funzione che Ti Cambierà la Vita</h2>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">Guarda come i tuoi clienti vedranno i tempi di attesa in tempo reale. Questa funzione da sola vale più del prezzo del sito.</p>
+                
+                <div class="max-w-md mx-auto">
+                    <div id="waiting-times-preview" class="mb-6">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <p class="text-sm text-gray-500">👆 Aggiornamento automatico ogni 3 secondi</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-5xl mx-auto">
+                    <div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-red-500">
+                        <div class="text-3xl mb-3">😤</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Il Problema Quotidiano</h3>
+                        <p class="text-sm text-gray-600 italic">"Scusi, quanto manco ancora?"</p>
+                        <p class="text-sm text-gray-600 italic">"Ma perché quel signore è passato prima?"</p>
+                        <p class="text-sm text-gray-600 italic">"Posso andare al bar e tornare?"</p>
+                        <p class="text-xs text-gray-500 mt-2">👆 Senti queste frasi 20 volte al giorno?</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-yellow-500">
+                        <div class="text-3xl mb-3">📱</div>
+                        <h3 class="font-bold text-gray-800 mb-2">La Soluzione Semplice</h3>
+                        <p class="text-sm text-gray-600">Il cliente guarda il telefono: <strong>"15 minuti di attesa"</strong></p>
+                        <p class="text-sm text-gray-600">Va al bar, torna al momento giusto.</p>
+                        <p class="text-sm text-gray-600">Tu lavori in pace. Lui è contento.</p>
+                        <p class="text-xs text-gray-500 mt-2">👆 Così funziona il sistema tempi reali</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 shadow-lg border-l-4 border-green-500">
+                        <div class="text-3xl mb-3">💰</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Il Risultato Pratico</h3>
+                        <p class="text-sm text-gray-600">Più clienti serviti senza stress</p>
+                        <p class="text-sm text-gray-600">Zero telefonate "quanto manco?"</p>
+                        <p class="text-sm text-gray-600">Clienti che tornano perché è comodo</p>
+                        <p class="text-xs text-gray-500 mt-2">👆 Questo è il vero valore del sistema</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 rounded-xl p-6 mt-8 max-w-3xl mx-auto text-center">
+                    <p class="text-lg font-semibold text-gray-800 mb-2">🎯 Il Punto È Questo:</p>
+                    <p class="text-gray-700">Non ti sto vendendo un sito web. Ti sto dando lo strumento per eliminare il 90% delle rotture di scatole quotidiane.</p>
+                    <p class="text-sm text-gray-600 mt-2 italic">E questo vale molto più di quello che ti costa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing & Demo Section -->
+        <section id="prezzi" class="bg-white py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="font-serif text-5xl font-bold text-center mb-4">Scegli il Tuo Livello</h2>
+                <p class="text-xl text-gray-600 text-center mb-8 max-w-3xl mx-auto">Ogni pacchetto include hosting gratuito per 1 anno, supporto tecnico e aggiornamenti. Zero costi nascosti.</p>
+                
+                <!-- Transparent Pricing Info -->
+                <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-12 max-w-4xl mx-auto">
+                    <h3 class="font-bold text-green-800 text-center mb-4">📋 Cosa Succede Dopo il Primo Anno?</h3>
+                    <div class="grid md:grid-cols-2 gap-6 text-sm">
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2">💰 Costi di Mantenimento:</h4>
+                            <ul class="text-green-700 space-y-1">
+                                <li>• Hosting: €8/mese (€96/anno)</li>
+                                <li>• Dominio: €15/anno</li>
+                                <li>• Assistenza base: Inclusa</li>
+                                <li>• <strong>Totale: €111/anno</strong></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-700 mb-2">🆓 Opzioni Alternative:</h4>
+                            <ul class="text-green-700 space-y-1">
+                                <li>• Gestisci tu l'hosting: €0</li>
+                                <li>• Ti insegno come fare</li>
+                                <li>• Assistenza a chiamata: €50/ora</li>
+                                <li>• <strong>Sei libero di scegliere</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-center text-green-800 font-semibold mt-4">⚖️ Nessun vincolo. Nessuna fregatura. Prezzi chiari dall'inizio.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+                    <!-- Pacchetto 1: Vetrina -->
+                    <div class="border border-[var(--border-color)] bg-white rounded-xl p-6 md:p-8 flex flex-col hover:shadow-xl transition-all duration-300">
+                        <div class="feature-icon">💼</div>
+                        <h3 class="font-serif text-2xl font-bold text-gradient">La Vetrina</h3>
+                        <div class="price-highlight">
+                            <p class="font-serif text-5xl font-bold text-center">€350</p>
+                            <p class="text-sm text-center text-gray-500">una tantum</p>
+                        </div>
+                        <p class="text-gray-600 mt-4 mb-6 flex-grow">Perfetto per iniziare. Un sito web professionale che presenta la tua barberia con eleganza e semplicità.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-2">✅ Cosa ottieni:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Sito web responsive (5-6 pagine)</li>
+                                <li>• Galleria foto dei tuoi lavori</li>
+                                <li>• Informazioni di contatto</li>
+                                <li>• Integrazione Google Maps</li>
+                                <li>• Hosting gratuito per 1 anno</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="showDemo('vetrina')" class="w-full text-center bg-[var(--accent-color)] text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity mb-3">Prova la Demo</button>
+                        <a href="https://wa.me/390694428189?text=Ciao!%20Sono%20interessato%20al%20pacchetto%20La%20Vetrina%20da%20€350" onclick="trackWhatsApp('vetrina-package')" class="w-full text-center border-2 border-[var(--accent-color)] text-[var(--accent-color)] font-bold py-3 rounded-lg hover:bg-[var(--accent-color)] hover:text-white transition-all">Richiedi Info</a>
+                    </div>
+
+                    <!-- Pacchetto 2: Artigiano -->
+                    <div class="border-2 bg-white rounded-xl p-6 md:p-8 flex flex-col highlight-package hover:shadow-2xl transition-all duration-300">
+                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[var(--accent-color)] text-white text-xs font-bold px-4 py-1 rounded-full uppercase pulse-animation">🔥 Più Popolare</span>
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="font-serif text-2xl font-bold text-gradient">L'Artigiano</h3>
+                        <div class="price-highlight">
+                            <p class="font-serif text-5xl font-bold text-center">€950</p>
+                            <p class="text-sm text-center text-gray-500">una tantum</p>
+                        </div>
+                        <p class="text-gray-600 mt-4 mb-6 flex-grow">La scelta intelligente. Include la rivoluzionaria funzione "Tempi di Attesa" che gestisce automaticamente i tuoi clienti.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-2">🚀 Tutto di "La Vetrina" PLUS:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• <strong>Sistema Tempi di Attesa in Tempo Reale</strong></li>
+                                <li>• Prenotazioni online automatiche</li>
+                                <li>• Gestione lista clienti</li>
+                                <li>• Notifiche WhatsApp automatiche</li>
+                                <li>• Pannello di controllo personalizzato</li>
+                                <li>• Sistema recensioni integrate</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-3 rounded-lg mb-4 text-center">
+                            <p class="text-sm font-semibold text-blue-800">🎯 Il pacchetto che risolve il 90% dei problemi quotidiani</p>
+                        </div>
+                        
+                        <button onclick="showDemo('artigiano')" class="w-full text-center bg-[var(--accent-color)] text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity mb-3">Prova la Demo Interattiva</button>
+                        <a href="https://wa.me/390694428189?text=Ciao!%20Voglio%20il%20pacchetto%20L'Artigiano%20con%20i%20tempi%20di%20attesa!%20Parliamone." onclick="trackWhatsApp('artigiano-package')" class="w-full text-center bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition-all">Lo Voglio Ora!</a>
+                    </div>
+
+                    <!-- Pacchetto 3: Salone -->
+                    <div class="border border-[var(--border-color)] bg-white rounded-xl p-6 md:p-8 flex flex-col hover:shadow-xl transition-all duration-300">
+                        <div class="feature-icon">👑</div>
+                        <h3 class="font-serif text-2xl font-bold text-gradient">Il Salone</h3>
+                        <div class="price-highlight">
+                            <p class="font-serif text-4xl font-bold text-center">Da €1800</p>
+                            <p class="text-sm text-center text-gray-500">progetto su misura</p>
+                        </div>
+                        <p class="text-gray-600 mt-4 mb-6 flex-grow">Per brand di lusso. Un'esperienza digitale completa con design unico e funzionalità avanzate su misura.</p>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-semibold mb-2">💎 Tutto di "L'Artigiano" PLUS:</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Design completamente personalizzato</li>
+                                <li>• E-commerce integrato (prodotti/servizi)</li>
+                                <li>• Sistema fedeltà clienti avanzato</li>
+                                <li>• App mobile dedicata</li>
+                                <li>• Marketing automation</li>
+                                <li>• Consulenza strategica mensile</li>
+                            </ul>
+                        </div>
+                        
+                        <button onclick="showDemo('salone')" class="w-full text-center bg-[var(--accent-color)] text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity mb-3">Esplora la Demo</button>
+                        <a href="https://wa.me/390694428189?text=Ciao!%20Sono%20interessato%20al%20pacchetto%20premium%20Il%20Salone.%20Vorrei%20una%20consulenza%20gratuita." onclick="trackWhatsApp('salone-package')" class="w-full text-center border-2 border-[var(--accent-color)] text-[var(--accent-color)] font-bold py-3 rounded-lg hover:bg-[var(--accent-color)] hover:text-white transition-all">Consulenza Gratuita</a>
+                    </div>
+                </div>
+
+                <!-- Garanzia -->
+                <div class="mt-16 text-center">
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-8 max-w-3xl mx-auto">
+                        <h3 class="font-serif text-2xl font-bold text-blue-900 mb-4">🛡️ Garanzia Soddisfatti o Rimborsati</h3>
+                        <p class="text-blue-800">Se entro 30 giorni non sei completamente soddisfatto del tuo sito web, ti rimborso ogni centesimo. Senza domande.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local Consultation Section -->
+        <section class="bg-gradient-to-br from-gray-800 to-gray-900 text-white py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-serif text-4xl font-bold mb-6">🤝 Preferisci Parlarne di Persona?</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                    Lavoro solo a <strong>Roma e dintorni</strong>. Vengo io da te, vediamo insieme la tua barberia, 
+                    capiamo i problemi specifici e progettiamo la soluzione perfetta.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">📍</div>
+                        <h3 class="font-bold text-xl mb-2">Consulenza Gratuita</h3>
+                        <p class="text-gray-300">Vengo da te, vediamo tutto insieme, nessun impegno</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">🔧</div>
+                        <h3 class="font-bold text-xl mb-2">Installazione Guidata</h3>
+                        <p class="text-gray-300">Ti insegno personalmente ad usare tutto</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="font-bold text-xl mb-2">Supporto Diretto</h3>
+                        <p class="text-gray-300">Il mio numero WhatsApp per qualsiasi problema</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4">📅 Prenota la Tua Consulenza Gratuita</h3>
+                    <p class="mb-6 opacity-90">Dimmi quando e dove. Ci vediamo, parliamo dei tuoi problemi specifici, vedi le demo dal vivo.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/390694428189?text=Ciao!%20Vorrei%20prenotare%20una%20consulenza%20gratuita%20per%20il%20sistema%20tempi%20di%20attesa.%20Quando%20puoi%20venire?" 
+                           onclick="trackWhatsApp('consultation-request')" 
+                           class="bg-green-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.570-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            Prenota Consulenza Gratuita
+                        </a>
+                        <a href="tel:+390694428189" 
+                           class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-gray-900 transition-all flex items-center justify-center gap-2">
+                            📞 Chiamami Ora
+                        </a>
+                    </div>
+                    
+                    <p class="text-sm opacity-75 mt-4">
+                        🕐 Disponibile: Lun-Ven 9-18 | Zone: Roma, Lazio, entro 50km dalla capitale
+                    </p>
+                </div>
+            </div>
+        </section>
+
+         <!-- Final CTA -->
+         <footer id="contatti" class="py-16 text-center">
+            <h2 class="font-serif text-3xl font-bold">Hai visto cosa posso fare per te.</h2>
+            <p class="mt-2 text-gray-600 max-w-xl mx-auto">Ora parliamone. Clicca qui sotto per una chiacchierata senza impegno su WhatsApp.</p>
+            <div class="mt-8">
+                <a href="https://wa.me/390694428189?text=Ciao!%20Ho%20provato%20le%20demo%20sul%20tuo%20sito%20e%20vorrei%20saperne%20di%20più." target="_blank" onclick="trackWhatsApp('main-cta')" class="inline-block bg-[var(--whatsapp-color)] text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg hover:scale-105 transition-transform pulse-animation">
+                    Inizia la Conversazione
+                </a>
+             </div>
+             <div class="mt-8 pt-8 border-t border-gray-200">
+                <p class="text-sm text-gray-500">&copy; <span id="currentYear"></span> AxiomWeb. Tutti i diritti riservati.</p>
+             </div>
+        </footer>
+    </main>
+
+    <script>
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

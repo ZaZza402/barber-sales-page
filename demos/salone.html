@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salone Aureo | Luxury Barbering Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #0a0a0a; 
+            color: #f8f8f8; 
+        }
+        .font-serif { 
+            font-family: 'Cormorant Garamond', serif; 
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37, #ffd700, #b8860b);
+        }
+        .luxury-bg {
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%);
+        }
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .animate-slideUp {
+            animation: slideUp 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .luxury-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .luxury-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #d4af37 var(--progress), transparent var(--progress));
+        }
+        .membership-tier {
+            position: relative;
+            overflow: hidden;
+        }
+        .membership-tier::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(212, 175, 55, 0.1), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Luxurious Fluid Door Animation */
+        @keyframes letterSlideInLeft {
+            0% { 
+                transform: translateX(-200vw) scale(0.6);
+                opacity: 0;
+                filter: blur(8px);
+            }
+            30% {
+                opacity: 0.3;
+                filter: blur(4px);
+            }
+            70% {
+                transform: translateX(-15px) scale(1.02);
+                opacity: 0.9;
+                filter: blur(1px);
+            }
+            85% {
+                transform: translateX(8px) scale(1.01);
+                opacity: 1;
+                filter: blur(0px);
+            }
+            95% {
+                transform: translateX(-3px) scale(0.999);
+            }
+            100% { 
+                transform: translateX(0) scale(1);
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+        
+        @keyframes letterSlideInRight {
+            0% { 
+                transform: translateX(200vw) scale(0.6);
+                opacity: 0;
+                filter: blur(8px);
+            }
+            30% {
+                opacity: 0.3;
+                filter: blur(4px);
+            }
+            70% {
+                transform: translateX(15px) scale(1.02);
+                opacity: 0.9;
+                filter: blur(1px);
+            }
+            85% {
+                transform: translateX(-8px) scale(1.01);
+                opacity: 1;
+                filter: blur(0px);
+            }
+            95% {
+                transform: translateX(3px) scale(0.999);
+            }
+            100% { 
+                transform: translateX(0) scale(1);
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+        
+        @keyframes doorSplitLeft {
+            0% { 
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            20% {
+                transform: translateX(-5px) scale(1.01);
+            }
+            100% { 
+                transform: translateX(-100vw) scale(1.1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes doorSplitRight {
+            0% { 
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            20% {
+                transform: translateX(5px) scale(1.01);
+            }
+            100% { 
+                transform: translateX(100vw) scale(1.1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes luxuryGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.6),
+                           0 0 40px rgba(212, 175, 55, 0.4),
+                           0 0 60px rgba(212, 175, 55, 0.3);
+            }
+            50% { 
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.9),
+                           0 0 60px rgba(212, 175, 55, 0.6),
+                           0 0 90px rgba(212, 175, 55, 0.4);
+            }
+        }
+        
+        @keyframes pageReveal {
+            0% { 
+                opacity: 1; 
+                backdrop-filter: blur(0px);
+                transform: scale(1);
+            }
+            60% { 
+                opacity: 0.4; 
+                backdrop-filter: blur(8px);
+                transform: scale(1.02);
+            }
+            100% { 
+                opacity: 0; 
+                backdrop-filter: blur(15px);
+                transform: scale(1.05);
+                visibility: hidden;
+            }
+        }
+        
+        /* Mobile-Optimized Responsive Animations */
+        @media (max-width: 768px) {
+            @keyframes letterSlideInLeft {
+                0% { 
+                    transform: translateX(-150vw) scale(0.7);
+                    opacity: 0;
+                    filter: blur(6px);
+                }
+                35% {
+                    opacity: 0.4;
+                    filter: blur(3px);
+                }
+                75% {
+                    transform: translateX(-10px) scale(1.02);
+                    opacity: 0.9;
+                    filter: blur(0px);
+                }
+                90% {
+                    transform: translateX(5px) scale(1.01);
+                }
+                100% { 
+                    transform: translateX(0) scale(1);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes letterSlideInRight {
+                0% { 
+                    transform: translateX(150vw) scale(0.7);
+                    opacity: 0;
+                    filter: blur(6px);
+                }
+                35% {
+                    opacity: 0.4;
+                    filter: blur(3px);
+                }
+                75% {
+                    transform: translateX(10px) scale(1.02);
+                    opacity: 0.9;
+                    filter: blur(0px);
+                }
+                90% {
+                    transform: translateX(-5px) scale(1.01);
+                }
+                100% { 
+                    transform: translateX(0) scale(1);
+                    opacity: 1;
+                }
+            }
+        }
+        
+        .luxury-letter-S {
+            animation: letterSlideInLeft 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+                      luxuryGlow 3s ease-in-out 2s infinite alternate;
+        }
+        
+        .luxury-letter-A {
+            animation: letterSlideInRight 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+                      luxuryGlow 3s ease-in-out 2s infinite alternate;
+        }
+        
+        .luxury-letter-S.door-opening {
+            animation: doorSplitLeft 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .luxury-letter-A.door-opening {
+            animation: doorSplitRight 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .luxury-preloader.page-reveal {
+            animation: pageReveal 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        /* Luxury Quote Styling */
+        .luxury-quote {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.9) 0%, 
+                rgba(255, 215, 0, 0.8) 25%, 
+                rgba(255, 255, 255, 0.9) 50%, 
+                rgba(255, 215, 0, 0.8) 75%, 
+                rgba(212, 175, 55, 0.9) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Luxurious Fluid Door Preloader -->
+    <div id="preloader" class="luxury-preloader fixed inset-0 bg-black flex items-center justify-center z-50 overflow-hidden">
+        <div class="flex items-center justify-center space-x-2 md:space-x-4 w-full">
+            <!-- Left Door - Letter S -->
+            <div class="luxury-letter-S gold-gradient text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-serif bg-clip-text text-transparent font-black tracking-tighter select-none">
+                S
+            </div>
+            <!-- Right Door - Letter A -->
+            <div class="luxury-letter-A gold-gradient text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-serif bg-clip-text text-transparent font-black tracking-tighter select-none">
+                A
+            </div>
+        </div>
+        
+        <!-- Elegant Subtitle (appears after letters settle) -->
+        <div id="subtitle-reveal" class="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 opacity-0 transition-opacity duration-1500 ease-out">
+            <p class="text-yellow-400/90 text-xs sm:text-sm md:text-base font-light tracking-[0.3em] sm:tracking-[0.4em] uppercase text-center px-4">
+                Salone Aureo
+            </p>
+            <div class="w-16 sm:w-20 md:w-24 h-0.5 gold-gradient mx-auto mt-2 md:mt-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-serif text-xl md:text-2xl font-bold tracking-wider gold-gradient bg-clip-text text-transparent">
+                    SALONE AUREO
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-yellow-400 transition font-light tracking-wide">Home</a>
+                    <a href="#services" class="hover:text-yellow-400 transition font-light tracking-wide">Servizi</a>
+                    <a href="#membership" class="hover:text-yellow-400 transition font-light tracking-wide">Membership</a>
+                    <a href="#experience" class="hover:text-yellow-400 transition font-light tracking-wide">Experience</a>
+                    <a href="#contact" class="hover:text-yellow-400 transition font-light tracking-wide">Contatti</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn-salone" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition">
+                    <div class="w-6 h-6 flex flex-col justify-center space-y-1">
+                        <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line1-salone"></span>
+                        <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line2-salone"></span>
+                        <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line3-salone"></span>
+                    </div>
+                </button>
+                
+                <button onclick="showMembershipModal()" class="hidden md:block gold-gradient text-black px-6 py-2 rounded-full font-semibold hover:scale-105 transition">
+                    Prenota Esperienza
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu-salone" class="md:hidden glass-effect border-t border-yellow-400/20 absolute top-full left-0 right-0 transform -translate-y-full opacity-0 invisible transition-all duration-300">
+                <nav class="px-6 py-6 space-y-4">
+                    <a href="#home" class="block py-3 text-white hover:text-yellow-400 transition font-light tracking-wide border-b border-white/10">Home</a>
+                    <a href="#services" class="block py-3 text-white hover:text-yellow-400 transition font-light tracking-wide border-b border-white/10">Servizi</a>
+                    <a href="#membership" class="block py-3 text-white hover:text-yellow-400 transition font-light tracking-wide border-b border-white/10">Membership</a>
+                    <a href="#experience" class="block py-3 text-white hover:text-yellow-400 transition font-light tracking-wide border-b border-white/10">Experience</a>
+                    <a href="#contact" class="block py-3 text-white hover:text-yellow-400 transition font-light tracking-wide border-b border-white/10">Contatti</a>
+                    <button onclick="showMembershipModal()" class="w-full gold-gradient text-black py-3 mt-4 rounded-full font-semibold hover:scale-105 transition">
+                        ✨ Prenota Esperienza
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="images/barber-hero-bg.jpg" alt="Salone Aureo" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/90"></div>
+        </div>
+        <div class="relative z-10 container mx-auto px-4 md:px-6 animate-fadeIn text-center">
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-widest mb-6 animate-fadeIn leading-tight">
+                <span class="gold-gradient bg-clip-text text-transparent block">SALONE</span>
+                <span class="text-white block">AUREO</span>
+            </h1>
+            <div class="w-24 sm:w-28 md:w-32 h-1 gold-gradient mx-auto mb-8 animate-fadeIn" style="animation-delay: 0.3s;"></div>
+            <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-12 max-w-3xl mx-auto opacity-90 animate-slideUp px-4" style="animation-delay: 0.5s;">
+                Un'esperienza. Non solo un taglio.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center animate-slideUp" style="animation-delay: 0.7s;">
+                <button onclick="showMembershipModal()" class="gold-gradient text-black px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:scale-105 transition w-full sm:w-auto">
+                    Diventa Membro Elite
+                </button>
+                <a href="#experience" class="inline-block border-2 border-yellow-400 text-yellow-400 px-6 py-3 sm:px-8 sm:py-3 md:px-10 md:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg hover:bg-yellow-400 hover:text-black transition w-full sm:w-auto text-center">
+                    Scopri l'Esperienza
+                </a>
+            </div>
+        </div>
+        
+        <!-- Elegant Quote -->
+        <div class="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 text-center animate-fadeIn" style="animation-delay: 1s;">
+            <p class="luxury-quote text-sm md:text-base font-light italic tracking-wide opacity-90 max-w-xs md:max-w-sm mx-auto leading-relaxed">
+                "L'eleganza è l'unica bellezza che non sfiorisce mai"
+            </p>
+            <div class="w-8 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mt-3"></div>
+        </div>
+    </section>
+
+    <!-- Services Excellence -->
+    <section id="services" class="py-24 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slideUp">
+                <h2 class="font-serif text-5xl font-bold mb-6">Servizi di Eccellenza</h2>
+                <div class="w-24 h-1 gold-gradient mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Ogni servizio è un rituale curato nei minimi dettagli, utilizzando solo i migliori prodotti al mondo
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Imperial Cut -->
+                <div class="luxury-card glass-effect rounded-2xl p-8 hover-glow">
+                    <div class="text-4xl mb-6">👑</div>
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-yellow-400">Imperial Cut</h3>
+                    <p class="text-gray-300 mb-6">Taglio personalizzato con consulenza stile, shampoo con prodotti Aesop, styling finale.</p>
+                    <div class="border-t border-yellow-400/20 pt-4">
+                        <p class="font-bold text-3xl text-yellow-400">€85</p>
+                        <p class="text-sm text-gray-400">60 minuti di pura eleganza</p>
+                    </div>
+                </div>
+
+                <!-- Royal Shave -->
+                <div class="luxury-card glass-effect rounded-2xl p-8 hover-glow">
+                    <div class="text-4xl mb-6">🗡️</div>
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-yellow-400">Royal Shave</h3>
+                    <p class="text-gray-300 mb-6">Rasatura tradizionale con rasoio giapponese, trattamento pre e post rasatura, massaggio viso.</p>
+                    <div class="border-t border-yellow-400/20 pt-4">
+                        <p class="font-bold text-3xl text-yellow-400">€65</p>
+                        <p class="text-sm text-gray-400">45 minuti di tradizione</p>
+                    </div>
+                </div>
+
+                <!-- Platinum Experience -->
+                <div class="luxury-card glass-effect rounded-2xl p-8 hover-glow bg-gradient-to-br from-yellow-400/10 to-transparent">
+                    <div class="text-4xl mb-6">💎</div>
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-yellow-400">Platinum Experience</h3>
+                    <p class="text-gray-300 mb-6">L'esperienza completa: taglio, rasatura, trattamento viso, massaggio, whisky premium.</p>
+                    <div class="border-t border-yellow-400/20 pt-4">
+                        <p class="font-bold text-3xl text-yellow-400">€150</p>
+                        <p class="text-sm text-gray-400">120 minuti di lusso assoluto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Portfolio -->
+    <section class="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slideUp">
+                <h2 class="font-serif text-5xl font-bold mb-6">Galleria di Eccellenza</h2>
+                <div class="w-24 h-1 gold-gradient mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Ogni taglio è un'opera d'arte, ogni cliente una tela su cui esprimere la nostra maestria
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                <div class="group relative overflow-hidden rounded-2xl luxury-card">
+                    <img src="images/style-2.jpg" alt="Imperial Cut Masterpiece" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-8 h-1 mb-2"></div>
+                            <h4 class="font-serif text-xl font-bold mb-1">Imperial Cut</h4>
+                            <p class="text-sm opacity-90">Taglio d'autore per CEO</p>
+                            <p class="text-xs text-yellow-400 mt-2">€85 • 60 min</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl luxury-card">
+                    <img src="images/style-1.jpg" alt="Royal Shave Experience" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-8 h-1 mb-2"></div>
+                            <h4 class="font-serif text-xl font-bold mb-1">Royal Shave</h4>
+                            <p class="text-sm opacity-90">Rasatura con rasoio giapponese</p>
+                            <p class="text-xs text-yellow-400 mt-2">€65 • 45 min</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl luxury-card lg:row-span-2">
+                    <img src="images/barber-at-work.jpg" alt="Master Craftsman" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-8 h-1 mb-2"></div>
+                            <h4 class="font-serif text-2xl font-bold mb-2">Maestro Alessandro</h4>
+                            <p class="text-sm opacity-90 mb-3">25 anni di esperienza nell'arte del barbiere</p>
+                            <div class="flex items-center space-x-2 text-yellow-400">
+                                <span class="text-xs">★★★★★</span>
+                                <span class="text-xs">Maestro Certificato</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl luxury-card">
+                    <img src="images/style-3.jpg" alt="Platinum Experience" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-8 h-1 mb-2"></div>
+                            <h4 class="font-serif text-xl font-bold mb-1">Platinum Experience</h4>
+                            <p class="text-sm opacity-90">Lusso assoluto e relax</p>
+                            <p class="text-xs text-yellow-400 mt-2">€150 • 120 min</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl luxury-card">
+                    <img src="images/style-4.jpg" alt="Executive Style" class="w-full h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-8 h-1 mb-2"></div>
+                            <h4 class="font-serif text-xl font-bold mb-1">Executive Style</h4>
+                            <p class="text-sm opacity-90">Per professionisti di successo</p>
+                            <p class="text-xs text-yellow-400 mt-2">Membership Gold</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl luxury-card md:col-span-2">
+                    <img src="images/style-5.jpg" alt="Luxury Treatment" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <div class="gold-gradient w-12 h-1 mb-3"></div>
+                            <h4 class="font-serif text-2xl font-bold mb-2">Trattamento VIP</h4>
+                            <p class="text-lg opacity-90 mb-3">Esperienza esclusiva con prodotti premium e servizi personalizzati</p>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-yellow-400 text-sm">Riservato ai membri Elite</span>
+                                <span class="text-xs bg-yellow-400 text-black px-3 py-1 rounded-full font-semibold">ESCLUSIVO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <div class="glass-effect rounded-2xl p-8 max-w-2xl mx-auto">
+                    <h3 class="font-serif text-2xl font-bold mb-4">Vuoi Vedere il Tuo Stile Qui?</h3>
+                    <p class="text-gray-300 mb-6">Prenota la tua prima sessione e scopri cosa significa essere un membro Aureo</p>
+                    <button onclick="showMembershipModal()" class="gold-gradient text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition">
+                        Prenota Consulenza Gratuita
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Program -->
+    <section id="membership" class="py-16 md:py-24 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16 animate-slideUp">
+                <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6 px-4 leading-tight">
+                    Programma<br class="md:hidden"> Membership Elite
+                </h2>
+                <div class="w-24 h-1 gold-gradient mx-auto mb-6 animate-fadeIn"></div>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4 leading-relaxed">
+                    Accedi a privilegi esclusivi e servizi riservati solo ai nostri membri più fedeli
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Bronze Tier -->
+                <div class="membership-tier glass-effect rounded-2xl p-8 hover-glow animate-slideUp" style="animation-delay: 0.2s;">
+                    <div class="relative z-10">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🥉</span>
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold">Bronze Elite</h3>
+                            <p class="text-gray-400">3 servizi/mese</p>
+                        </div>
+                        <div class="space-y-3 mb-8">
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> 10% sconto su tutti i servizi</p>
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> Prenotazione prioritaria</p>
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> Bevande premium incluse</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-yellow-400">€200/mese</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Silver Tier -->
+                <div class="membership-tier glass-effect rounded-2xl p-8 hover-glow border-2 border-yellow-400 relative animate-slideUp" style="animation-delay: 0.4s;">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 z-20">
+                        <div class="gold-gradient text-black px-6 py-2 rounded-full text-sm font-bold shadow-lg whitespace-nowrap">PIÙ POPOLARE</div>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-2xl">🥈</span>
+                            </div>
+                            <h3 class="font-serif text-2xl font-bold">Silver Elite</h3>
+                            <p class="text-gray-400">5 servizi/mese</p>
+                        </div>
+                        <div class="space-y-3 mb-8">
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> 20% sconto su tutti i servizi</p>
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> Servizi a domicilio (2/mese)</p>
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> Prodotti esclusivi inclusi</p>
+                            <p class="flex items-center"><span class="text-yellow-400 mr-2">✓</span> Eventi riservati ai membri</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-bold text-yellow-400">€350/mese</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gold Tier -->
+                <div class="membership-tier gold-gradient rounded-2xl p-8 hover-glow text-black animate-slideUp" style="animation-delay: 0.6s;">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🥇</span>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold">Gold Elite</h3>
+                        <p class="opacity-80">Servizi illimitati</p>
+                    </div>
+                    <div class="space-y-3 mb-8">
+                        <p class="flex items-center"><span class="mr-2">✓</span> Servizi illimitati</p>
+                        <p class="flex items-center"><span class="mr-2">✓</span> Servizi a domicilio illimitati</p>
+                        <p class="flex items-center"><span class="mr-2">✓</span> Concierge personale</p>
+                        <p class="flex items-center"><span class="mr-2">✓</span> Accesso lounge privata</p>
+                        <p class="flex items-center"><span class="mr-2">✓</span> Eventi esclusivi e viaggi</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-bold">€800/mese</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Dashboard Preview -->
+    <section id="experience" class="py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-5xl font-bold mb-6">La Tua Area Riservata</h2>
+                <div class="w-24 h-1 gold-gradient mx-auto mb-6"></div>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Un portale esclusivo per gestire la tua esperienza luxury
+                </p>
+            </div>
+
+            <div class="max-w-5xl mx-auto">
+                <!-- Dashboard Mock -->
+                <div class="glass-effect rounded-2xl p-8 mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold">Benvenuto, Alessandro</h3>
+                            <p class="text-yellow-400">Membro Silver Elite</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs md:text-sm text-gray-400">Prossimo appuntamento</p>
+                            <p class="font-bold text-sm md:text-base">Domani, 15:30</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Usage Stats -->
+                        <div class="bg-black/30 rounded-lg p-6">
+                            <h4 class="font-bold mb-4">Utilizzo Mensile</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Servizi utilizzati</span>
+                                        <span>3/5</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2">
+                                        <div class="progress-bar h-2 rounded-full" style="--progress: 60%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Punti fedeltà</span>
+                                        <span>2,840</span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2">
+                                        <div class="progress-bar h-2 rounded-full" style="--progress: 84%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="bg-black/30 rounded-lg p-6">
+                            <h4 class="font-bold mb-4">Azioni Rapide</h4>
+                            <div class="space-y-2">
+                                <button class="w-full text-left p-3 bg-yellow-400/10 border border-yellow-400/20 rounded hover:bg-yellow-400/20 transition">
+                                    📅 Prenota servizio
+                                </button>
+                                <button class="w-full text-left p-3 bg-yellow-400/10 border border-yellow-400/20 rounded hover:bg-yellow-400/20 transition">
+                                    🏠 Servizio a domicilio
+                                </button>
+                                <button class="w-full text-left p-3 bg-yellow-400/10 border border-yellow-400/20 rounded hover:bg-yellow-400/20 transition">
+                                    🎁 Riscatta punti
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent History -->
+                        <div class="bg-black/30 rounded-lg p-6">
+                            <h4 class="font-bold mb-4">Storico Recente</h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Imperial Cut</span>
+                                    <span class="text-yellow-400">15 Nov</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Royal Shave</span>
+                                    <span class="text-yellow-400">8 Nov</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Platinum Exp.</span>
+                                    <span class="text-yellow-400">1 Nov</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Styling Assistant Mock -->
+                <div class="glass-effect rounded-2xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center mr-4">
+                            <span class="text-black font-bold">AI</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Assistente Styling AI</h4>
+                            <p class="text-sm text-gray-400">Consigli personalizzati per il tuo stile</p>
+                        </div>
+                    </div>
+                    <div class="bg-black/30 rounded-lg p-6">
+                        <p class="mb-4 text-gray-300">
+                            "Basandomi sul tuo ultimo taglio e la forma del tuo viso, consiglio di accorciare i lati 
+                            mantenendo volume sopra. Il tuo stylist Marco può creare il look perfetto per l'evento di domani."
+                        </p>
+                        <button class="text-yellow-400 hover:text-yellow-300 transition">
+                            Prenota consulenza personalizzata →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Location -->
+    <section id="contact" class="py-24 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-5xl font-bold mb-6">Entra nel Mondo Aureo</h2>
+                    <div class="w-24 h-1 gold-gradient mx-auto"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="font-serif text-3xl font-bold mb-8">Prenota la Tua Consulenza Esclusiva</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-black">📍</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Via Condotti 15</p>
+                                    <p class="text-gray-400">00187 Roma RM - Zona Spagna</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-black">📞</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">
+                                        <a href="tel:+390694428189" class="hover:text-yellow-400 transition">06 9442 8189</a>
+                                    </p>
+                                    <p class="text-gray-400">Disponibile 24/7 per membri Elite</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 gold-gradient rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-black">💬</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">
+                                        <a href="https://wa.me/390694428189?text=Ciao!%20Sono%20interessato%20ai%20servizi%20luxury%20del%20Salone%20Aureo" class="hover:text-yellow-400 transition">WhatsApp VIP</a>
+                                    </p>
+                                    <p class="text-gray-400">Concierge personalizzato</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-6 glass-effect rounded-lg">
+                            <h4 class="font-bold mb-3">Orari Esclusivi</h4>
+                            <div class="space-y-1 text-sm">
+                                <p>Lunedì - Venerdì: 10:00 - 21:00</p>
+                                <p>Sabato: 9:00 - 20:00</p>
+                                <p>Domenica: Solo su appuntamento per membri Gold</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-effect rounded-2xl p-8">
+                        <h4 class="font-serif text-2xl font-bold mb-6 text-center">Richiedi Consulenza Gratuita</h4>
+                        <form class="space-y-4">
+                            <input type="text" placeholder="Nome e Cognome" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                            <input type="tel" placeholder="Numero di telefono" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                            <select class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                                <option>Interesse per membership</option>
+                                <option>Bronze Elite</option>
+                                <option>Silver Elite</option>
+                                <option>Gold Elite</option>
+                            </select>
+                            <textarea placeholder="Raccontaci delle tue esigenze..." rows="3" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none"></textarea>
+                            <button type="submit" class="w-full gold-gradient text-black py-3 rounded-lg font-bold hover:scale-105 transition">
+                                Prenota Consulenza Gratuita
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gradient-to-t from-yellow-400/5 to-black border-t border-yellow-400/20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="font-serif text-3xl font-bold tracking-widest mb-4 gold-gradient bg-clip-text text-transparent">
+                SALONE AUREO
+            </div>
+            <p class="text-gray-400 mb-6">Dove il lusso incontra la tradizione</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition">Facebook</a>
+                <a href="#" class="text-gray-400 hover:text-yellow-400 transition">LinkedIn</a>
+            </div>
+            <p class="text-sm text-gray-500">&copy; <span id="currentYear"></span> Salone Aureo. Tutti i diritti riservati.</p>
+            <p class="text-xs text-gray-600 mt-2">Piattaforma luxury barbering by <a href="https://www.axiomweb.eu" target="_blank" class="text-yellow-400 hover:text-yellow-300 transition">AxiomWeb</a></p>
+        </div>
+    </footer>
+
+    <!-- Membership Modal -->
+    <div id="membershipModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-effect rounded-2xl p-8 max-w-md mx-4 transform scale-95 transition-transform duration-300">
+            <h3 class="font-serif text-2xl font-bold mb-4 text-center">Diventa Membro Elite</h3>
+            <p class="text-gray-300 mb-6 text-center">Compila il form per ricevere informazioni dettagliate sui nostri programmi membership esclusivi.</p>
+            <div class="space-y-4 mb-6">
+                <input type="text" placeholder="Nome completo" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                <input type="email" placeholder="Email" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                <select class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 focus:border-yellow-400 focus:outline-none">
+                    <option>Seleziona membership di interesse</option>
+                    <option>Bronze Elite - €200/mese</option>
+                    <option>Silver Elite - €350/mese</option>
+                    <option>Gold Elite - €800/mese</option>
+                </select>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="closeMembershipModal()" class="flex-1 border border-gray-600 text-gray-300 py-3 rounded-lg hover:bg-gray-800 transition">
+                    Annulla
+                </button>
+                <button class="flex-1 gold-gradient text-black py-3 rounded-lg font-bold hover:scale-105 transition">
+                    Invia Richiesta
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Luxurious Fluid Door Animation Sequence
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            const letterS = document.querySelector('.luxury-letter-S');
+            const letterA = document.querySelector('.luxury-letter-A');
+            const subtitle = document.getElementById('subtitle-reveal');
+            
+            // Step 1: Letters slide in slowly and smoothly (2.8s)
+            // Step 2: Show subtitle after letters settle and begin glowing (3.2s delay)
+            setTimeout(() => {
+                if (subtitle) {
+                    subtitle.style.opacity = '1';
+                }
+            }, 3200);
+            
+            // Step 3: Let users appreciate the luxury for a moment (2s pause)
+            // Step 4: Begin elegant door splitting sequence (5.5s total delay)
+            setTimeout(() => {
+                // Fade subtitle first for clean transition
+                if (subtitle) {
+                    subtitle.style.opacity = '0';
+                }
+                
+                // Start door opening after brief subtitle fade
+                setTimeout(() => {
+                    // Add door opening classes to make letters split apart
+                    letterS.classList.add('door-opening');
+                    letterA.classList.add('door-opening');
+                    
+                    // Step 5: Begin page reveal as doors open (0.4s delay)
+                    setTimeout(() => {
+                        preloader.classList.add('page-reveal');
+                        
+                        // Step 6: Remove preloader completely after full animation (1.6s delay)
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 1600);
+                    }, 400);
+                }, 500);
+                
+            }, 5500);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Membership modal
+        function showMembershipModal() {
+            const modal = document.getElementById('membershipModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-effect').classList.remove('scale-95');
+            modal.querySelector('.glass-effect').classList.add('scale-100');
+        }
+
+        function closeMembershipModal() {
+            const modal = document.getElementById('membershipModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.glass-effect').classList.remove('scale-100');
+            modal.querySelector('.glass-effect').classList.add('scale-95');
+        }
+
+        // Progress bars animation on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.8s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            } else {
+                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            }
+        });
+
+        // Dynamic typing effect for AI assistant (simulation)
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Mobile Menu Toggle for Il Salone (Luxury)
+        const mobileMenuBtnSalone = document.getElementById('mobile-menu-btn-salone');
+        const mobileMenuSalone = document.getElementById('mobile-menu-salone');
+        const line1Salone = document.getElementById('line1-salone');
+        const line2Salone = document.getElementById('line2-salone');
+        const line3Salone = document.getElementById('line3-salone');
+
+        let isMenuOpenSalone = false;
+
+        mobileMenuBtnSalone?.addEventListener('click', function() {
+            isMenuOpenSalone = !isMenuOpenSalone;
+            
+            if (isMenuOpenSalone) {
+                // Show menu with luxury animation
+                mobileMenuSalone.classList.remove('-translate-y-full', 'opacity-0', 'invisible');
+                mobileMenuSalone.classList.add('translate-y-0', 'opacity-100', 'visible');
+                
+                // Animate hamburger to X with golden effect
+                line1Salone.style.transform = 'rotate(45deg) translateY(6px)';
+                line1Salone.style.backgroundColor = '#d4af37';
+                line2Salone.style.opacity = '0';
+                line3Salone.style.transform = 'rotate(-45deg) translateY(-6px)';
+                line3Salone.style.backgroundColor = '#d4af37';
+            } else {
+                // Hide menu
+                mobileMenuSalone.classList.remove('translate-y-0', 'opacity-100', 'visible');
+                mobileMenuSalone.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+                
+                // Animate X back to hamburger
+                line1Salone.style.transform = 'rotate(0) translateY(0)';
+                line1Salone.style.backgroundColor = 'white';
+                line2Salone.style.opacity = '1';
+                line3Salone.style.transform = 'rotate(0) translateY(0)';
+                line3Salone.style.backgroundColor = 'white';
+            }
+        });
+
+        // Function to close Salone menu
+        function closeMenuSalone() {
+            isMenuOpenSalone = false;
+            mobileMenuSalone.classList.remove('translate-y-0', 'opacity-100', 'visible');
+            mobileMenuSalone.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+            
+            // Reset hamburger
+            line1Salone.style.transform = 'rotate(0) translateY(0)';
+            line1Salone.style.backgroundColor = 'white';
+            line2Salone.style.opacity = '1';
+            line3Salone.style.transform = 'rotate(0) translateY(0)';
+            line3Salone.style.backgroundColor = 'white';
+        }
+
+        // Close menu when clicking on links
+        const mobileLinksSalone = mobileMenuSalone?.querySelectorAll('a[href^="#"]');
+        mobileLinksSalone?.forEach(link => {
+            link.addEventListener('click', closeMenuSalone);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (isMenuOpenSalone && 
+                mobileMenuSalone && 
+                !mobileMenuSalone.contains(event.target) && 
+                !mobileMenuBtnSalone.contains(event.target)) {
+                closeMenuSalone();
+            }
+        });
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add entrance animations to cards
+            const cards = document.querySelectorAll('.luxury-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barberia La Classica | Taglio e Barba Tradizionale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .hero-bg { 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('images/barber-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-gray-900 text-white relative z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="font-serif text-xl md:text-2xl font-bold">Barberia La Classica</h1>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#servizi" class="hover:text-gray-300 transition">Servizi</a>
+                <a href="#chi-siamo" class="hover:text-gray-300 transition">Chi Siamo</a>
+                <a href="#contatti" class="hover:text-gray-300 transition">Contatti</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition">
+                <div class="w-6 h-6 flex flex-col justify-center space-y-1">
+                    <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line1"></span>
+                    <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line2"></span>
+                    <span class="block w-full h-0.5 bg-white transition-all duration-300" id="line3"></span>
+                </div>
+            </button>
+            
+            <a href="tel:+390694428189" class="hidden md:inline-block bg-yellow-600 px-4 py-2 rounded font-semibold hover:bg-yellow-700 transition">Chiama Ora</a>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="md:hidden bg-gray-800 absolute top-full left-0 right-0 transform -translate-y-full opacity-0 invisible transition-all duration-300">
+            <nav class="px-6 py-4 space-y-4">
+                <a href="#servizi" class="block py-2 hover:text-yellow-400 transition">Servizi</a>
+                <a href="#chi-siamo" class="block py-2 hover:text-yellow-400 transition">Chi Siamo</a>
+                <a href="#contatti" class="block py-2 hover:text-yellow-400 transition">Contatti</a>
+                <a href="tel:+390694428189" class="block bg-yellow-600 text-center py-3 mt-4 rounded font-semibold hover:bg-yellow-700 transition">
+                    📞 Chiama Ora
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-32 text-center relative min-h-screen flex items-center">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-5xl md:text-6xl font-bold mb-4">Semplicità ed Eleganza</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Da tre generazioni, la nostra famiglia si prende cura del vostro stile con la tradizione del barbiere di una volta.</p>
+            <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex md:justify-center">
+                <a href="tel:+390694428189" class="inline-block bg-yellow-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-700 transition">Prenota Subito</a>
+                <a href="#servizi" class="inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition">I Nostri Servizi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servizi -->
+    <section id="servizi" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-4xl font-bold text-center mb-12 text-gray-900">I Nostri Servizi</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="text-center p-6 bg-gray-50 rounded-lg">
+                    <div class="text-4xl mb-4">✂️</div>
+                    <h3 class="font-bold text-xl mb-2">Taglio Classico</h3>
+                    <p class="text-gray-600 mb-3">Il taglio tradizionale con forbici e rasoio, come una volta.</p>
+                    <p class="font-bold text-2xl text-yellow-600">€20</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg">
+                    <div class="text-4xl mb-4">🧔</div>
+                    <h3 class="font-bold text-xl mb-2">Regolazione Barba</h3>
+                    <p class="text-gray-600 mb-3">Cura e modellazione della barba con prodotti premium.</p>
+                    <p class="font-bold text-2xl text-yellow-600">€15</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg">
+                    <div class="text-4xl mb-4">💈</div>
+                    <h3 class="font-bold text-xl mb-2">Rasatura Tradizionale</h3>
+                    <p class="text-gray-600 mb-3">Con sapone caldo e rasoio a mano libera.</p>
+                    <p class="font-bold text-2xl text-yellow-600">€25</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chi Siamo -->
+    <section id="chi-siamo" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-serif text-4xl font-bold mb-8 text-gray-900">La Nostra Storia</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-left">
+                        <p class="text-lg text-gray-700 mb-6">
+                            Fondata nel 1960 da Giuseppe Romano, la Barberia La Classica è un punto di riferimento 
+                            nel quartiere Prati di Roma. Tre generazioni di maestri barbieri si sono succedute, 
+                            mantenendo viva la tradizione dell'arte del taglio.
+                        </p>
+                        <p class="text-lg text-gray-700">
+                            Oggi Marco e Luca Romano continuano l'eredità del nonno, combinando tecniche tradizionali 
+                            con i migliori prodotti moderni per offrire un servizio sempre impeccabile.
+                        </p>
+                    </div>
+                    <div class="h-64 rounded-lg overflow-hidden">
+                        <img src="images/barber-at-work.jpg" alt="Maestro barbiere al lavoro" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galleria -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="font-serif text-4xl font-bold text-center mb-12 text-gray-900">I Nostri Lavori</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-1.jpg" alt="Taglio classico elegante" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-2.jpg" alt="Rasatura tradizionale" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-3.jpg" alt="Barba modellata" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-4.jpg" alt="Taglio moderno" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-5.jpg" alt="Styling completo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="h-48 rounded-lg overflow-hidden">
+                    <img src="images/style-6.jpg" alt="Risultato finale" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contatti -->
+    <section id="contatti" class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-serif text-4xl font-bold text-center mb-12">Vieni a Trovarci</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="font-bold text-xl mb-4">Informazioni</h3>
+                        <div class="space-y-3">
+                            <p class="flex items-center">
+                                <span class="mr-3">📍</span>
+                                Via Ottaviano 85, 00192 Roma RM
+                            </p>
+                            <p class="flex items-center">
+                                <span class="mr-3">📞</span>
+                                <a href="tel:+390694428189" class="hover:text-yellow-400">06 9442 8189</a>
+                            </p>
+                            <p class="flex items-center">
+                                <span class="mr-3">💬</span>
+                                <a href="https://wa.me/390694428189?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento" class="hover:text-yellow-400">WhatsApp</a>
+                            </p>
+                        </div>
+
+                        <h3 class="font-bold text-xl mb-4 mt-8">Orari di Apertura</h3>
+                        <div class="space-y-2 text-gray-300">
+                            <p>Lunedì - Venerdì: 9:00 - 19:00</p>
+                            <p>Sabato: 9:00 - 18:00</p>
+                            <p>Domenica: Chiuso</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 h-64 rounded-lg overflow-hidden relative">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.1987847533483!2d12.456384!3d41.906901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f99d4c55%3A0x5904c8b66a7d8aff!2sVia%20Ottaviano%2C%2000192%20Roma%20RM!5e0!3m2!1sit!2sit!4v1693298001234!5m2!1sit!2sit" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; <span id="currentYear"></span> Barberia La Classica. Tutti i diritti riservati.</p>
+            <p class="text-sm text-gray-400 mt-2">Sito web realizzato da <a href="https://www.axiomweb.eu" target="_blank" class="text-yellow-500 hover:text-yellow-400 transition">AxiomWeb</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        const line3 = document.getElementById('line3');
+
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', function() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                // Show menu
+                mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'invisible');
+                mobileMenu.classList.add('translate-y-0', 'opacity-100', 'visible');
+                
+                // Animate hamburger to X
+                line1.style.transform = 'rotate(45deg) translateY(6px)';
+                line2.style.opacity = '0';
+                line3.style.transform = 'rotate(-45deg) translateY(-6px)';
+            } else {
+                // Hide menu
+                mobileMenu.classList.remove('translate-y-0', 'opacity-100', 'visible');
+                mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+                
+                // Animate X back to hamburger
+                line1.style.transform = 'rotate(0) translateY(0)';
+                line2.style.opacity = '1';
+                line3.style.transform = 'rotate(0) translateY(0)';
+            }
+        });
+
+        // Function to close Vetrina menu
+        function closeMenuVetrina() {
+            isMenuOpen = false;
+            mobileMenu.classList.remove('translate-y-0', 'opacity-100', 'visible');
+            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'invisible');
+            
+            // Reset hamburger
+            line1.style.transform = 'rotate(0) translateY(0)';
+            line2.style.opacity = '1';
+            line3.style.transform = 'rotate(0) translateY(0)';
+        }
+
+        // Close menu when clicking on links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenuVetrina);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (isMenuOpen && 
+                !mobileMenu.contains(event.target) && 
+                !mobileMenuBtn.contains(event.target)) {
+                closeMenuVetrina();
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
