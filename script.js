@@ -109,40 +109,135 @@ class WaitingTimesSimulator {
         ];
         this.currentState = 0;
         this.isRunning = false;
+        this.isManualMode = false;
+        this.displayElement = null;
+        this.autoInterval = null;
     }
 
     start(elementId) {
         const element = document.getElementById(elementId);
         if (!element) return;
 
+        this.displayElement = element;
         this.isRunning = true;
-        this.updateDisplay(element);
+        this.updateDisplay();
 
+        // Start auto mode if not in manual mode
+        if (!this.isManualMode) {
+            this.startAutoMode();
+        }
+    }
+
+    startAutoMode() {
+        this.stopAutoMode();
+        
         // Change state every 3 seconds
-        const interval = setInterval(() => {
-            if (!this.isRunning) {
-                clearInterval(interval);
+        this.autoInterval = setInterval(() => {
+            if (!this.isRunning || this.isManualMode) {
+                this.stopAutoMode();
                 return;
             }
 
             this.currentState = (this.currentState + 1) % this.states.length;
-            this.updateDisplay(element);
+            this.updateDisplay();
         }, 3000);
     }
 
-    updateDisplay(element) {
+    stopAutoMode() {
+        if (this.autoInterval) {
+            clearInterval(this.autoInterval);
+            this.autoInterval = null;
+        }
+    }
+
+    setManualMode(enabled) {
+        this.isManualMode = enabled;
+        if (enabled) {
+            this.stopAutoMode();
+        } else if (this.isRunning) {
+            this.startAutoMode();
+        }
+        this.updatePhoneButtons();
+    }
+
+    setState(stateIndex) {
+        if (stateIndex >= 0 && stateIndex < this.states.length) {
+            this.currentState = stateIndex;
+            this.updateDisplay();
+            this.updatePhoneButtons();
+        }
+    }
+
+    updateDisplay() {
+        if (!this.displayElement) return;
+        
         const state = this.states[this.currentState];
-        element.innerHTML = `
+        
+        // Add sync animation for interactive demo
+        if (this.displayElement.id === 'interactive-customer-display') {
+            this.displayElement.style.transform = 'scale(0.95)';
+            this.displayElement.style.transition = 'transform 0.2s ease-in-out';
+        }
+        
+        this.displayElement.innerHTML = `
             <div class="waiting-times-demo" style="background: ${state.color};">
                 <div class="text-2xl mb-2">${state.icon}</div>
                 <div class="font-bold text-lg">${state.text}</div>
                 <div class="text-sm opacity-90 mt-1">Aggiornamento in tempo reale</div>
             </div>
         `;
+        
+        // Also update phone status if this is the interactive simulator
+        if (this.displayElement.id === 'interactive-customer-display') {
+            this.updatePhoneStatus();
+            // Restore scale after animation
+            setTimeout(() => {
+                this.displayElement.style.transform = 'scale(1)';
+            }, 100);
+        }
+    }
+    
+    updatePhoneStatus() {
+        const phoneStatus = document.getElementById('phone-current-status');
+        if (phoneStatus) {
+            const state = this.states[this.currentState];
+            phoneStatus.className = `border rounded-lg p-3 text-center`;
+            
+            // Set colors based on state
+            if (this.currentState === 0) {
+                phoneStatus.className += ' bg-green-100 border-green-300';
+            } else if (this.currentState === 1) {
+                phoneStatus.className += ' bg-yellow-100 border-yellow-300';
+            } else if (this.currentState === 2) {
+                phoneStatus.className += ' bg-orange-100 border-orange-300';
+            } else {
+                phoneStatus.className += ' bg-red-100 border-red-300';
+            }
+            
+            phoneStatus.innerHTML = `
+                <div class="text-lg font-bold" style="color: ${state.color};">${state.icon} ${state.text}</div>
+                <div class="text-xs opacity-75">Stato sincronizzato</div>
+            `;
+        }
+    }
+
+    updatePhoneButtons() {
+        // Update button styles to show current state
+        const buttons = document.querySelectorAll('.phone-btn');
+        buttons.forEach((btn, index) => {
+            if (index === this.currentState) {
+                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+            } else {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            }
+        });
     }
 
     stop() {
         this.isRunning = false;
+        this.stopAutoMode();
     }
 }
 
@@ -187,12 +282,14 @@ class SalesTracker {
 // Global instances
 let demoManager;
 let waitingSimulator;
+let interactiveSimulator;
 let salesTracker;
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     demoManager = new DemoManager();
     waitingSimulator = new WaitingTimesSimulator();
+    interactiveSimulator = new WaitingTimesSimulator();
     salesTracker = new SalesTracker();
     
     // Start tracking
@@ -202,6 +299,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const waitingDemoElement = document.getElementById('waiting-times-preview');
     if (waitingDemoElement) {
         waitingSimulator.start('waiting-times-preview');
+    }
+    
+    // Start interactive customer display (starts in auto mode)
+    const interactiveElement = document.getElementById('interactive-customer-display');
+    if (interactiveElement) {
+        interactiveSimulator.start('interactive-customer-display');
     }
 });
 
@@ -213,6 +316,43 @@ window.showDemo = function(demoType) {
 
 window.trackWhatsApp = function(context = 'general') {
     salesTracker?.trackWhatsAppClick(context);
+};
+
+// Phone control functions for interactive demo
+window.setWaitingState = function(stateIndex) {
+    if (interactiveSimulator) {
+        // Enable manual mode and set the state
+        interactiveSimulator.setManualMode(true);
+        interactiveSimulator.setState(stateIndex);
+        
+        // Update toggle button since we're now in manual mode
+        const toggleBtn = document.querySelector('.toggle-auto-btn');
+        if (toggleBtn) {
+            toggleBtn.textContent = '✋ Manuale';
+            toggleBtn.classList.remove('bg-green-600');
+            toggleBtn.classList.add('bg-orange-600');
+        }
+        
+        // Track interaction
+        if (salesTracker) {
+            salesTracker.trackEvent('phone_control_used', { state: stateIndex });
+        }
+    }
+};
+
+window.toggleAutoMode = function() {
+    if (interactiveSimulator) {
+        const newMode = !interactiveSimulator.isManualMode;
+        interactiveSimulator.setManualMode(!newMode);
+        
+        // Update toggle button text
+        const toggleBtn = document.querySelector('.toggle-auto-btn');
+        if (toggleBtn) {
+            toggleBtn.textContent = newMode ? '🔄 Auto' : '✋ Manuale';
+            toggleBtn.classList.toggle('bg-green-600', newMode);
+            toggleBtn.classList.toggle('bg-orange-600', !newMode);
+        }
+    }
 };
 
 // Mobile Menu Toggle for Main Landing Page
